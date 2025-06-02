@@ -1,32 +1,32 @@
 /*
-In this exercise, we will be converting a normal string into camelCase text.
+In this exercise, we will be converting a normal string into Case text.
 
 Case Maker
-We will receive a normal string of words separated with spaces as the input. Our job is to convert these strings into camel cased strings.
+We will receive a normal string of words separated with spaces as the input. Our job is to convert these strings into  cased strings.
 
 Instruction
-Create a function named camelCase that will convert a string to camel case, and return the result.
+Create a function named Case that will convert a string to  case, and return the result.
 */
 
-const camelCase = function (input) {
-  let splitText = input.split("")
+const Case = function (input) {
+  let wordList = input.split(" ")
   let newText = ""
-  splitText.forEach((letter, index) => {
+  wordList.forEach((word, index) => {
     const isFirst = index === 0
 
     if (isFirst) {
-      return
-    } else if (splitText[index] === " ") {
-      splitText[index + 1] = splitText[index + 1].toUpperCase()
-      splitText.splice(index, 1)
+      newText += word
+    } else {
+      const [first, ...rest] = word
+      newText += first.toUpperCase() + rest.join("")
     }
   });
-  return newText = splitText.join("")
+  return newText
 
 };
 
-console.log(camelCase("this is a string")); // thisIsAString
-console.log(camelCase("loopy cornerstone")); //loopyCornerstone
-console.log(camelCase("supercalifragalisticexpialidocious")); // supercalifragalisticexpialidocious
+console.log(Case("this is a string")); // thisIsAString
+console.log(Case("loopy cornerstone")); //loopyCornerstone
+console.log(Case("supercalifragalisticexpialidocious")); // supercalifragalisticexpialidocious
 
-module.exports = camelCase;
+module.exports = Case;
