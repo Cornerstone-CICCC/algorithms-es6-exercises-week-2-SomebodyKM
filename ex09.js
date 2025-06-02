@@ -9,7 +9,20 @@ Create a function named camelCase that will convert a string to camel case, and 
 */
 
 const camelCase = function (input) {
-  // Your code here
+  let splitText = input.split("")
+  let newText = ""
+  splitText.forEach((letter, index) => {
+    const isFirst = index === 0
+
+    if (isFirst) {
+      return
+    } else if (splitText[index] === " ") {
+      splitText[index + 1] = splitText[index + 1].toUpperCase()
+      splitText.splice(index, 1)
+    }
+  });
+  return newText = splitText.join("")
+
 };
 
 console.log(camelCase("this is a string")); // thisIsAString
