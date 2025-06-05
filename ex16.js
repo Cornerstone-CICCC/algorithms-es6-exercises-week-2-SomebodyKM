@@ -7,7 +7,7 @@ Create a function named makeCaze that will receive an input string and one or mo
 Precedence of each of the casing styles are as follows, values higher in the list should be processed first:
 
 camel, pascal, snake, kebab, title
-vowel, consonant
+vowel , consonant
 upper, lower
 Our function should be able to handle all of these cases.
 
@@ -16,7 +16,98 @@ For more information on casing styles, read Wikipedia's Special Case Styles for 
 */
 
 const makeCaze = function (input, caze) {
-  // Put your solution here
+
+  const changeCase = (cases, inputStr) => {
+    const words = inputStr.split(" ")
+    const letterList = inputStr.split("")
+    let result = ""
+
+    switch (cases) {
+      case "camel":
+        result = words.map((word, index) => {
+          const isFirst = index === 0
+
+          if (isFirst) {
+            return word
+          } else {
+            const [first, ...rest] = word
+            return first.toUpperCase() + rest.join("")
+          }
+        }).join("")
+        break
+
+      case "pascal":
+        result = words.map(word => {
+          const [first, ...rest] = word
+          return first.toUpperCase() + rest.join("")
+        }).join("")
+        break
+
+      case "snake":
+        result = words.join("_")
+        break
+
+      case "kebab":
+        result = words.join("-")
+        break
+
+      case "title":
+        result = words.map(word => {
+          const [first, ...rest] = word
+          return first.toUpperCase() + rest.join("")
+        }).join(" ")
+        break
+
+      case "vowel":
+        result = letterList.map(letter => {
+          if (letter === "a" || letter === "e" || letter === "i" || letter === "o" || letter === "u") {
+            return letter.toUpperCase()
+          } else {
+            return letter
+          }
+        }).join("")
+        break
+
+      case "consonant":
+        result = letterList.map(letter => {
+          if (letter === "a" || letter === "e" || letter === "i" || letter === "o" || letter === "u") {
+            return letter
+          } else {
+            return letter.toUpperCase()
+          }
+        }).join("")
+        break
+
+      case "upper":
+        result = letterList.map(letter => {
+          return letter.toUpperCase()
+        }).join("")
+        break
+
+      case "lower":
+        result = letterList.map(letter => {
+          return letter.toLowerCase()
+        }).join("")
+        break
+    }
+    return result
+  }
+
+  if (Array.isArray(caze)) {
+    let initialWords = input
+    caze.forEach(eachCase => {
+
+      if (!Array.isArray(initialWords)) {
+
+        initialWords = changeCase(eachCase, initialWords)
+      }
+    });
+    result = initialWords
+
+  } else {
+    result = changeCase(caze, input)
+  }
+  return result
 };
 
 console.log(makeCaze("this is a string", "camel")); // thisIsAString

@@ -23,11 +23,45 @@ Penny (1¢)
 */
 
 const calculateChange = function (total, cash) {
-  // Your code here
+  const change = {}
+  let totalChanges = cash - total
+  const denominations = {
+    twentyDollar: 2000,
+    tenDollar: 1000,
+    fiveDollar: 500,
+    twoDollar: 200,
+    oneDollar: 100,
+    quarter: 25,
+    dime: 10,
+    nickel: 5,
+    penny: 1
+  }
+
+  const { twentyDollar, tenDollar, fiveDollar, twoDollar, oneDollar, quarter, dime, nickel, penny } = denominations
+
+  const calculate = (name, coin) => {
+    const tempChange = Math.floor(totalChanges / coin)
+    if (tempChange > 0) {
+      change[name] = tempChange
+      totalChanges = totalChanges - coin * tempChange
+    }
+  }
+
+  calculate("twentyDollar", twentyDollar)
+  calculate("tenDollar", tenDollar)
+  calculate("fiveDollar", fiveDollar)
+  calculate("twoDollar", twoDollar)
+  calculate("oneDollar", oneDollar)
+  calculate("quarter", quarter)
+  calculate("dime", dime)
+  calculate("nickel", nickel)
+  calculate("penny", penny)
+
+  return change
 };
 
 console.log(calculateChange(1787, 2000)); // { twoDollar: 1, dime: 1, penny: 3 }
 console.log(calculateChange(2623, 4000)); // { tenDollar: 1, twoDollar: 1, oneDollar: 1, quarter: 3, penny: 2 }
 console.log(calculateChange(501, 1000)); // { twoDollar: 2, quarter: 3, dime: 2, penny: 4 }
-
+console.log(calculateChange(501, 3000))
 module.exports = calculateChange;

@@ -23,7 +23,39 @@ Create a function named squareCode that will receive a message, and return the s
 */
 
 const squareCode = function (message) {
-  // Put your solution here
+  let letterArr = []
+  const lineArrs = []
+  const newMsgArr = message.split(" ").join("").split("")
+  const numOfArr = Math.ceil(Math.sqrt(newMsgArr.length))
+  const rowCount = Math.ceil(newMsgArr.length / numOfArr)
+
+  newMsgArr.forEach((letter, index) => {
+
+    letterArr.push(letter)
+    if (letterArr.length === numOfArr) {
+      lineArrs.push(letterArr)
+      letterArr = []
+    }
+    if (index === newMsgArr.length - 1 && letterArr.length > 0) {
+      lineArrs.push(letterArr);
+    }
+  })
+  let newLineArrs = []
+  for (let i = 0; i < lineArrs.length; i++) {
+    for (let j = 0; j < lineArrs[i].length; j++) {
+      if (!newLineArrs[j]) {
+        newLineArrs[j] = []
+      }
+      newLineArrs[j][i] = lineArrs[i][j]
+    };
+
+  }
+
+  const results = newLineArrs.map(line => {
+    return line.join("")
+  })
+
+  return results.join(" ")
 };
 
 console.log(squareCode("chill out")); // clu hlt io

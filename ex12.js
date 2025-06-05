@@ -21,7 +21,21 @@ This one is a doozy! We might want to start by creating a helper function called
 */
 
 const chooseRecipe = function (bakeryA, bakeryB, recipes) {
-  // Code here!
+  let result = ""
+  recipes.forEach(recipe => {
+    const { name, ingredients } = recipe
+
+    const isInBakery = ingredients.every(ingredient => {
+      return bakeryA.includes(ingredient) || bakeryB.includes(ingredient)
+    })
+
+    if (isInBakery) {
+      result = name
+    }
+  });
+
+
+  return result
 };
 
 let bakeryA = ["saffron", "eggs", "tomato paste", "coconut", "custard"];
